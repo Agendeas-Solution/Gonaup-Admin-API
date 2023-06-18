@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "target": "es2018",
+    "sourceMap": true,
+    "outDir": "build",
+    "baseUrl": "./",
+    "incremental": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  }
+}

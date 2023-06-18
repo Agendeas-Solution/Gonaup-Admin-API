@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "c550b3ff-7182-4743-82a2-32cb41d3f881",
+		"name": "Gonaup - Admin - API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13975886",
+		"_collection_link": "https://universal-zodiac-442173.postman.co/workspace/New-Team-Workspace~de4a4ffc-51a9-4d86-8d31-950c7d687116/collection/13975886-c550b3ff-7182-4743-82a2-32cb41d3f881?action=share&creator=13975886&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "User Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Jenish\",\n    \"email\": \"jenish@gmail.com\",\n    \"password\": \"jenish@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/auth/signup",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"jenish@gmail.com\",\n    \"password\": \"jenish@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/auth/login",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Admin Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/admin",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Search Framework List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/search/framework/list",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"search",
+								"framework",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Skill List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/search/skill/list",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"search",
+								"skill",
+								"list"
+							],
+							"query": [
+								{
+									"key": "searchQuery",
+									"value": "re",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localUrl",
+			"value": "http://localhost:8008",
+			"type": "string"
+		},
+		{
+			"key": "authToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY4NzA5MTM0M30.KFf-_NpoiYf1tkOuqkUfg03RqSYJtI_aVzqKQWmORkM",
+			"type": "string"
+		}
+	]
+}
