@@ -1,8 +1,6 @@
 import { Router } from 'express'
 import { adminController } from '../controllers'
-import { joiValidatorMiddleware, validateTokenMiddleware } from '../middlewares'
-import { adminSchemas } from '../validators'
-import { API_URL } from '../constants'
+import { validateTokenMiddleware } from '../middlewares'
 
 const adminRouter = Router()
 

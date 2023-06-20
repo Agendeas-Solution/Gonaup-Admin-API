@@ -11,40 +11,13 @@
 			"name": "Authentication",
 			"item": [
 				{
-					"name": "User Signup",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Jenish\",\n    \"email\": \"jenish@gmail.com\",\n    \"password\": \"jenish@123\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{localUrl}}/auth/signup",
-							"host": [
-								"{{localUrl}}"
-							],
-							"path": [
-								"auth",
-								"signup"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "User Login",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"jenish@gmail.com\",\n    \"password\": \"jenish@123\"\n}",
+							"raw": "{\n    \"email\": \"jenishshekhaliya@gmail.com\",\n    \"password\": \"jenish@820\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -95,10 +68,10 @@
 			]
 		},
 		{
-			"name": "Search",
+			"name": "Framework",
 			"item": [
 				{
-					"name": "Search Framework List",
+					"name": "Get Framework List",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -109,21 +82,32 @@
 							}
 						],
 						"url": {
-							"raw": "{{localUrl}}/search/framework/list",
+							"raw": "{{localUrl}}/framework/list",
 							"host": [
 								"{{localUrl}}"
 							],
 							"path": [
-								"search",
 								"framework",
 								"list"
+							],
+							"query": [
+								{
+									"key": "searchQuery",
+									"value": "react",
+									"disabled": true
+								}
 							]
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Skill",
+			"item": [
 				{
-					"name": "Search Skill List",
+					"name": "Get Skill List",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -134,12 +118,11 @@
 							}
 						],
 						"url": {
-							"raw": "{{localUrl}}/search/skill/list",
+							"raw": "{{localUrl}}/skill/list",
 							"host": [
 								"{{localUrl}}"
 							],
 							"path": [
-								"search",
 								"skill",
 								"list"
 							],

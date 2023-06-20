@@ -1,6 +1,7 @@
 export const MESSAGES = {
   AUTH: {
     USER_REGISTERD_SUCCESSFULLY: 'Registration Successful',
+    USER_LOGIN_SUCCESSFULLY: 'Login Successful',
     USER_ALREADY_EXISTS: 'User already exists with this email address',
     USER_NOT_EXISTS: 'User not exists with this email address',
     INVALID_EMAIL_PASSWORD: 'Invalid email or password',
