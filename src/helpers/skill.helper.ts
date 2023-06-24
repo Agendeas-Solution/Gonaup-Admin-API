@@ -41,6 +41,63 @@ class SkillHelper {
       ${whereQuery}`
     return pool.query(findQuery)
   }
+
+  async addSkill(name: string) {
+    const insertQuery = `
+    INSERT INTO skills
+        (name)
+    VALUES 
+        (?)`
+    return pool.query(insertQuery, [name])
+  }
+
+  async getSkillByName(name: string) {
+    const insertQuery = `
+    SELECT
+      name
+    FROM 
+      skills
+    WHERE
+      name = ?
+      AND deleted_at IS NULL`
+    return pool.query(insertQuery, [name])
+  }
+
+  async checkSkillByNameAndId(name: string, skillId: number) {
+    const insertQuery = `
+    SELECT
+      name
+    FROM 
+      skills
+    WHERE
+      name = ?
+      AND id != ?
+      AND deleted_at IS NULL`
+    return pool.query(insertQuery, [name, skillId])
+  }
+
+  async updateSkill(name: string, skillId: number) {
+    const insertQuery = `
+    UPDATE
+      skills
+    SET
+      name = ?
+    WHERE
+      id = ?
+      AND deleted_at IS NULL`
+    return pool.query(insertQuery, [name, skillId])
+  }
+
+  async deleteSkill(skillId: number) {
+    const insertQuery = `
+    UPDATE
+      skills
+    SET
+      deleted_at = now()
+    WHERE
+      id = ?`
+    return pool.query(insertQuery, [skillId])
+  }
 }
 
 export const skillHelper = new SkillHelper()

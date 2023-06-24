@@ -13,4 +13,25 @@ skillRouter.get(
   skillController.getSkillList,
 )
 
+skillRouter.post(
+  '/',
+  joiValidatorMiddleware(skillSchemas.addSkill),
+  validateTokenMiddleware,
+  skillController.addSkill,
+)
+
+skillRouter.put(
+  '/',
+  joiValidatorMiddleware(skillSchemas.updateSkill),
+  validateTokenMiddleware,
+  skillController.updateSkill,
+)
+
+skillRouter.delete(
+  '/',
+  joiValidatorMiddleware(skillSchemas.deleteSkill),
+  validateTokenMiddleware,
+  skillController.deleteSkill,
+)
+
 export { skillRouter }

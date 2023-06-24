@@ -13,4 +13,25 @@ frameworkRouter.get(
   frameworkController.getFrameworkList,
 )
 
+frameworkRouter.post(
+  '/',
+  joiValidatorMiddleware(frameworkSchemas.addFramework),
+  validateTokenMiddleware,
+  frameworkController.addFramework,
+)
+
+frameworkRouter.put(
+  '/',
+  joiValidatorMiddleware(frameworkSchemas.updateFramework),
+  validateTokenMiddleware,
+  frameworkController.updateFramework,
+)
+
+frameworkRouter.delete(
+  '/',
+  joiValidatorMiddleware(frameworkSchemas.deleteFramework),
+  validateTokenMiddleware,
+  frameworkController.deleteFramwork,
+)
+
 export { frameworkRouter }

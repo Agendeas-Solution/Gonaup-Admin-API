@@ -11,4 +11,23 @@ export const skillSchemas = {
       size: Joi.number(),
     }).required(),
   }).unknown(),
+
+  addSkill: Joi.object({
+    body: Joi.object({
+      name: Joi.string().required(),
+    }).required(),
+  }).unknown(),
+
+  updateSkill: Joi.object({
+    body: Joi.object({
+      name: Joi.string().required(),
+      skillId: Joi.number().required(),
+    }).required(),
+  }).unknown(),
+
+  deleteSkill: Joi.object({
+    body: Joi.object({
+      skillId: Joi.number().required(),
+    }).required(),
+  }).unknown(),
 }

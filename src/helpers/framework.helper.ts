@@ -41,6 +41,63 @@ class FrameworkHelper {
       ${whereQuery}`
     return pool.query(findQuery)
   }
+
+  async addFramework(name: string) {
+    const insertQuery = `
+    INSERT INTO frameworks
+        (name)
+    VALUES 
+        (?)`
+    return pool.query(insertQuery, [name])
+  }
+
+  async getFrameworkByName(name: string) {
+    const insertQuery = `
+    SELECT
+      name
+    FROM 
+      frameworks
+    WHERE
+      name = ?
+      AND deleted_at IS NULL`
+    return pool.query(insertQuery, [name])
+  }
+
+  async checkFrameworkByNameAndId(name: string, frameworkId: number) {
+    const insertQuery = `
+    SELECT
+      name
+    FROM 
+      frameworks
+    WHERE
+      name = ?
+      AND id != ?
+      AND deleted_at IS NULL`
+    return pool.query(insertQuery, [name, frameworkId])
+  }
+
+  async updateFramework(name: string, frameworkId: number) {
+    const insertQuery = `
+    UPDATE
+      frameworks
+    SET
+      name = ?
+    WHERE
+      id = ?
+      AND deleted_at IS NULL`
+    return pool.query(insertQuery, [name, frameworkId])
+  }
+
+  async deleteFramwork(frameworkId: number) {
+    const insertQuery = `
+    UPDATE
+      frameworks
+    SET
+      deleted_at = now()
+    WHERE
+      id = ?`
+    return pool.query(insertQuery, [frameworkId])
+  }
 }
 
 export const frameworkHelper = new FrameworkHelper()
