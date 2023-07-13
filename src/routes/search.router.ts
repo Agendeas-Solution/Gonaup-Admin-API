@@ -13,11 +13,4 @@ searchRouter.get(
   searchController.getSkillList,
 )
 
-searchRouter.get(
-  API_URL.FRAMEWORK + API_URL.LIST,
-  joiValidatorMiddleware(searchSchemas.searchList),
-  validateTokenMiddleware,
-  searchController.getFrameworkList,
-)
-
 export { searchRouter }

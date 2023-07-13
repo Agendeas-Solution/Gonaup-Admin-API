@@ -16,9 +16,6 @@ export const MESSAGES = {
     PROCEED: 'Proceed!',
     NO_TOKEN_SUPPLIED: 'No token supplied',
   },
-  FRAMEWORK: {
-    FRAMEWORK_ALREADY_EXISTS: 'Framework already exists with this name',
-  },
   SKILL: {
     SKILL_ALREADY_EXISTS: 'Skill already exists with this name',
   },

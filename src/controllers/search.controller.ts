@@ -16,20 +16,6 @@ class SearchController {
       next(error)
     }
   }
-
-  async getFrameworkList(req: Request, res: Response, next: NextFunction) {
-    try {
-      sendSuccessResponse(
-        res,
-        await searchService.getFrameworkList({
-          searchQuery: req.query.searchQuery,
-          limit: req.query.limit,
-        }),
-      )
-    } catch (error) {
-      next(error)
-    }
-  }
 }
 
 export const searchController = new SearchController()
