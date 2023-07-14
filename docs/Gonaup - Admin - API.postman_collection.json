@@ -198,6 +198,246 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "Get Service List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/service/list?page=1&size=10",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"service",
+								"list"
+							],
+							"query": [
+								{
+									"key": "searchQuery",
+									"value": "de",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Service",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Mobile App Developement\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/service",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Service",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Mobile Application Developement\",\n    \"serviceId\" : 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/service",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Service",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serviceId\" : 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/service",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"service"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "Get Project List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/project/list?page=1&size=10&contactStatus=0&jobStatus=0",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"project",
+								"list"
+							],
+							"query": [
+								{
+									"key": "searchQuery",
+									"value": "de",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "serviceId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "minHourlyRate",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "hiringStatus",
+									"value": "0",
+									"description": "0=invited,1=interested,2=suggested,3=hired",
+									"disabled": true
+								},
+								{
+									"key": "contactStatus",
+									"value": "0",
+									"description": "0=open,1=closed"
+								},
+								{
+									"key": "jobStatus",
+									"value": "0",
+									"description": "0=open,1=closed"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/project/details?projectId=2",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"project",
+								"details"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [

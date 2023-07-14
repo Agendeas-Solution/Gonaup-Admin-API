@@ -3,4 +3,5 @@ export const API_URL = {
   LIST: '/list',
   SKILL: '/skill',
   SERVICE: '/service',
+  DETAILS: '/details',
 }

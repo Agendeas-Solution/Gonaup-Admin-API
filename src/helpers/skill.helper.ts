@@ -98,6 +98,19 @@ class SkillHelper {
       id = ?`
     return pool.query(insertQuery, [skillId])
   }
+
+  async getSkillListByIds(skillIds: string) {
+    const findQuery = `
+    SELECT
+      id,
+      name
+    FROM
+      skills
+    WHERE
+      id IN (${skillIds}) 
+      AND deleted_at IS NULL`
+    return pool.query(findQuery)
+  }
 }
 
 export const skillHelper = new SkillHelper()

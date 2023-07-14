@@ -98,6 +98,19 @@ class ServiceHelper {
       id = ?`
     return pool.query(insertQuery, [serviceId])
   }
+
+  async getServiceListByIds(serviceIds: string) {
+    const findQuery = `
+    SELECT
+      id,
+      name
+    FROM
+      services
+    WHERE
+      id IN (${serviceIds}) 
+      AND deleted_at IS NULL`
+    return pool.query(findQuery)
+  }
 }
 
 export const serviceHelper = new ServiceHelper()
