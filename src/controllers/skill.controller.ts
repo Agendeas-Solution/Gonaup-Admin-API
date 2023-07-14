@@ -10,6 +10,7 @@ class SkillController {
         await skillService.getSkillList({
           searchQuery: req.query.searchQuery,
           limit: req.query.limit,
+          size: req.query.size,
         }),
       )
     } catch (error) {

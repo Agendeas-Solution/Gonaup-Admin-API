@@ -19,4 +19,7 @@ export const MESSAGES = {
   SKILL: {
     SKILL_ALREADY_EXISTS: 'Skill already exists with this name',
   },
+  SERVICE: {
+    SERVICE_ALREADY_EXISTS: 'Service already exists with this name',
+  },
 }
