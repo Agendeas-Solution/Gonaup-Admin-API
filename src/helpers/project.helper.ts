@@ -1,3 +1,116 @@
-class ProjectHelper {}
+import { S3_CONFIG } from '../config'
+import { S3 } from '../constants'
+import { pool } from '../databases'
+import { getProjectOrJobListSearchQuery, paginationLimitQuery } from '../utils'
+
+class ProjectHelper {
+  async getProjectList(data) {
+    const limitQuery = paginationLimitQuery(data.page, data.size)
+
+    const findQuery = `
+      SELECT
+        id,
+        title,
+        description,
+        budget_type,
+        fixed_budget,
+        min_hourly_budget,
+        max_hourly_budget,
+        skills,
+        created_at,
+        project_status,
+        contract_status,
+        ${this.getHiringRecordsCountSQLByStatus(0, 'invited')},
+        ${this.getHiringRecordsCountSQLByStatus(1, 'interested')},
+        ${this.getHiringRecordsCountSQLByStatus(2, 'suggested')},
+        ${this.getHiringRecordsCountSQLByStatus(3, 'hired')}
+      FROM
+        projects as p
+      WHERE
+        deleted_at IS NULL
+        ${getProjectOrJobListSearchQuery(data)}
+      ORDER BY
+        created_at DESC
+      ${limitQuery}`
+    return pool.query(findQuery)
+  }
+
+  async getProjectsCount(data) {
+    const findQuery = `
+      SELECT
+        COUNT(id) as total
+      FROM
+        projects
+      WHERE
+        deleted_at IS NULL
+        ${getProjectOrJobListSearchQuery(data)}`
+    return pool.query(findQuery)
+  }
+
+  getHiringRecordsCountSQLByStatus(status: number, alias: string) {
+    return `
+    (
+        SELECT 
+            COUNT(1)
+        FROM
+            hiring_records as hr
+        WHERE
+            hr.project_id = p.id 
+            AND hr.status = ${status}
+            AND hr.deleted_at IS NULL
+    ) as ${alias}`
+  }
+
+  async getProjectDetailsById(projectId: number) {
+    const findQuery = `
+    SELECT
+      p.id,
+      p.title,
+      p.description,
+      p.budget_type,
+      p.fixed_budget,
+      p.min_hourly_budget,
+      p.max_hourly_budget,
+      p.skills,
+      s.id as service_id,
+      s.name as service_name,
+      p.project_duration,
+      p.experience_needed,
+      p.hour_per_week,
+      p.project_status,
+      p.commission,
+      p.hiring_status,
+      p.contract_status,
+      u.first_name as user_first_name,
+      u.last_name as user_last_name,
+      concat("${
+        S3_CONFIG.S3_URL + S3.PROFILE
+      }/", u.image_url) as user_image_url,
+      u.country_name as user_country,
+      u.state_name as user_state,
+      u.contact_number as user_contact_number,
+      u.email as user_email,
+      u.skype_id as user_skype_id,
+      c.linkdin_profile as user_linkdin_profile
+    FROM
+      projects as p
+    LEFT JOIN
+      services as s 
+    ON 
+      p.service_id = s.id
+    LEFT JOIN
+      companies as c
+    ON
+      p.company_id = c.id
+    LEFT JOIN
+      user_master as u
+    ON
+      c.user_id = u.id
+    WHERE
+      p.id = ?
+      AND p.deleted_at IS NULL`
+    return pool.query(findQuery, [projectId])
+  }
+}
 
 export const projectHelper = new ProjectHelper()
