@@ -1,8 +1,9 @@
 import { FieldPacket, RowDataPacket } from 'mysql2'
-import { NotFoundException } from '../exceptions'
+import { BadRequestException, NotFoundException } from '../exceptions'
 import { projectHelper } from '../helpers'
 import { MESSAGES } from '../constants'
 import { getSkillList } from '../utils'
+import { addProjectCommission } from '../interfaces'
 
 class ProjectService {
   async getProjectList(data) {
@@ -52,6 +53,68 @@ class ProjectService {
       return {
         message: MESSAGES.COMMON_MESSAGE.RECORD_FOUND_SUCCESSFULLY,
         data: projectDetail[0],
+      }
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
+
+  async closeProject(projectId: number, reason: string) {
+    try {
+      await projectHelper.closeProject(projectId, reason)
+      return {
+        message: MESSAGES.PROJECT.CLOSED_SUCCEESSFULLY,
+      }
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
+
+  async addProjectCommission(data: addProjectCommission) {
+    try {
+      const [projectBudget] = await projectHelper.getProjectBudget(
+        data.projectId,
+      )
+      if (!projectBudget[0])
+        throw new NotFoundException(MESSAGES.COMMON_MESSAGE.RECORD_NOT_FOUND)
+
+      const projectMinBudget =
+        data.budgetType === 0
+          ? projectBudget[0].fixed_budget
+          : projectBudget[0].min_hourly_budget
+
+      if (data.commission >= projectMinBudget)
+        throw new BadRequestException(MESSAGES.PROJECT.INVALID_COMMISSION)
+
+      await projectHelper.addProjectCommission(data.projectId, data.commission)
+      return {
+        message: MESSAGES.PROJECT.COMMISSION,
+      }
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
+
+  async updateHiringStatus(projectId: number, hiringStatus: number) {
+    try {
+      await projectHelper.updateHiringStatus(projectId, hiringStatus)
+      return {
+        message: MESSAGES.PROJECT.HIRING_STATUS,
+      }
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
+
+  async updateProjectContractStatus(projectId: number, contractStatus: number) {
+    try {
+      await projectHelper.updateProjectContractStatus(projectId, contractStatus)
+      return {
+        message: MESSAGES.PROJECT.CONTRACT_STATUS,
       }
     } catch (error) {
       console.log(error)

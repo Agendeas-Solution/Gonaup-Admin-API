@@ -20,4 +20,32 @@ projectRouter.get(
   projectController.getProjectDetailsById,
 )
 
+projectRouter.post(
+  API_URL.PROJECT.CLOSE,
+  validateTokenMiddleware,
+  joiValidatorMiddleware(projectSchemas.closeProject),
+  projectController.closeProject,
+)
+
+projectRouter.post(
+  API_URL.PROJECT.COMMISSION,
+  validateTokenMiddleware,
+  joiValidatorMiddleware(projectSchemas.addProjectCommission),
+  projectController.addProjectCommission,
+)
+
+projectRouter.post(
+  API_URL.PROJECT.HIRING_STATUS,
+  validateTokenMiddleware,
+  joiValidatorMiddleware(projectSchemas.updateHiringStatus),
+  projectController.updateHiringStatus,
+)
+
+projectRouter.post(
+  API_URL.PROJECT.CONTRACT_STATUS,
+  validateTokenMiddleware,
+  joiValidatorMiddleware(projectSchemas.updateContractStatus),
+  projectController.updateProjectContractStatus,
+)
+
 export { projectRouter }

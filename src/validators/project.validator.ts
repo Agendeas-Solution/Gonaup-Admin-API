@@ -23,4 +23,33 @@ export const projectSchemas = {
       projectId: Joi.number().required(),
     }).required(),
   }).unknown(),
+
+  closeProject: Joi.object({
+    body: Joi.object({
+      projectId: Joi.number().required(),
+      reason: Joi.string().required(),
+    }).required(),
+  }).unknown(),
+
+  addProjectCommission: Joi.object({
+    body: Joi.object({
+      projectId: Joi.number().required(),
+      budgetType: Joi.number().valid(0, 1).required(),
+      commission: Joi.number().greater(0).required(),
+    }).required(),
+  }).unknown(),
+
+  updateHiringStatus: Joi.object({
+    body: Joi.object({
+      projectId: Joi.number().required(),
+      hiringStatus: Joi.number().valid(0, 1, 2, 3).required(),
+    }).required(),
+  }).unknown(),
+
+  updateContractStatus: Joi.object({
+    body: Joi.object({
+      projectId: Joi.number().required(),
+      contractStatus: Joi.number().valid(1, 2).required(),
+    }).required(),
+  }).unknown(),
 }

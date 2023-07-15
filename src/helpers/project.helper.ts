@@ -63,53 +63,112 @@ class ProjectHelper {
 
   async getProjectDetailsById(projectId: number) {
     const findQuery = `
-    SELECT
-      p.id,
-      p.title,
-      p.description,
-      p.budget_type,
-      p.fixed_budget,
-      p.min_hourly_budget,
-      p.max_hourly_budget,
-      p.skills,
-      s.id as service_id,
-      s.name as service_name,
-      p.project_duration,
-      p.experience_needed,
-      p.hour_per_week,
-      p.project_status,
-      p.commission,
-      p.hiring_status,
-      p.contract_status,
-      u.first_name as user_first_name,
-      u.last_name as user_last_name,
-      concat("${
-        S3_CONFIG.S3_URL + S3.PROFILE
-      }/", u.image_url) as user_image_url,
-      u.country_name as user_country,
-      u.state_name as user_state,
-      u.contact_number as user_contact_number,
-      u.email as user_email,
-      u.skype_id as user_skype_id,
-      c.linkdin_profile as user_linkdin_profile
-    FROM
-      projects as p
-    LEFT JOIN
-      services as s 
-    ON 
-      p.service_id = s.id
-    LEFT JOIN
-      companies as c
-    ON
-      p.company_id = c.id
-    LEFT JOIN
-      user_master as u
-    ON
-      c.user_id = u.id
-    WHERE
-      p.id = ?
-      AND p.deleted_at IS NULL`
+      SELECT
+        p.id,
+        p.title,
+        p.description,
+        p.budget_type,
+        p.fixed_budget,
+        p.min_hourly_budget,
+        p.max_hourly_budget,
+        p.skills,
+        s.id as service_id,
+        s.name as service_name,
+        p.project_duration,
+        p.experience_needed,
+        p.hour_per_week,
+        p.project_status,
+        p.project_closed_reason,
+        p.commission,
+        p.hiring_status,
+        p.contract_status,
+        u.first_name as user_first_name,
+        u.last_name as user_last_name,
+        concat("${
+          S3_CONFIG.S3_URL + S3.PROFILE
+        }/", u.image_url) as user_image_url,
+        u.country_name as user_country,
+        u.state_name as user_state,
+        u.contact_number as user_contact_number,
+        u.email as user_email,
+        u.skype_id as user_skype_id,
+        c.linkdin_profile as user_linkdin_profile
+      FROM
+        projects as p
+      LEFT JOIN
+        services as s 
+      ON 
+        p.service_id = s.id
+      LEFT JOIN
+        companies as c
+      ON
+        p.company_id = c.id
+      LEFT JOIN
+        user_master as u
+      ON
+        c.user_id = u.id
+      WHERE
+        p.id = ?
+        AND p.deleted_at IS NULL`
     return pool.query(findQuery, [projectId])
+  }
+
+  async closeProject(projectId: number, reason: string) {
+    const updateQuery = `
+      UPDATE 
+        projects
+      SET
+        project_closed_reason = ?,
+        project_status = 1
+      WHERE
+        id = ?`
+    return pool.query(updateQuery, [reason, projectId])
+  }
+
+  async addProjectCommission(projectId: number, commission: number) {
+    const updateQuery = `
+      UPDATE 
+        projects
+      SET
+        commission = ?
+      WHERE
+        id = ?`
+    return pool.query(updateQuery, [commission, projectId])
+  }
+
+  async getProjectBudget(projectId: number) {
+    const findQuery = `
+      SELECT
+        fixed_budget,
+        min_hourly_budget
+      FROM
+        projects
+      WHERE
+        id = ?
+        AND deleted_at IS NULL`
+    return pool.query(findQuery, [projectId])
+  }
+
+  async updateHiringStatus(projectId: number, hiringStatus: number) {
+    const updateQuery = `
+      UPDATE 
+        projects
+      SET
+        hiring_status = ?
+      WHERE
+        id = ?`
+    return pool.query(updateQuery, [hiringStatus, projectId])
+  }
+
+  async updateProjectContractStatus(projectId: number, contractStatus: number) {
+    const updateQuery = `
+      UPDATE 
+        projects
+      SET
+        contract_status = ?
+      WHERE
+        id = ?`
+    return pool.query(updateQuery, [contractStatus, projectId])
   }
 }
 
