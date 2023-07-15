@@ -22,4 +22,11 @@ export const MESSAGES = {
   SERVICE: {
     SERVICE_ALREADY_EXISTS: 'Service already exists with this name',
   },
+  PROJECT: {
+    CLOSED_SUCCEESSFULLY: 'Project closed successfully!',
+    INVALID_COMMISSION: 'Invalid Commmission Amount!',
+    COMMISSION: 'Commission added successfully!',
+    HIRING_STATUS: 'Hiring status updated successfully!',
+    CONTRACT_STATUS: 'Contract status updated successfully!',
+  },
 }

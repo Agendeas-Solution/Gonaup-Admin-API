@@ -436,6 +436,138 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Close Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectId\" : 2,\n    \"reason\" : \"All positions filled\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/project/close",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"project",
+								"close"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Project Commission",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectId\" : 2,\n    \"budgetType\" : 0,\n    \"commission\" : 99\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/project/commission",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"project",
+								"commission"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Hiring Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectId\" : 2,\n    \"hiringStatus\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/project/hiring-status",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"project",
+								"hiring-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contract Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectId\" : 2,\n    \"contractStatus\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/project/contract-status",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"project",
+								"contract-status"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
