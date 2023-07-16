@@ -52,4 +52,27 @@ export const projectSchemas = {
       contractStatus: Joi.number().valid(1, 2).required(),
     }).required(),
   }).unknown(),
+
+  candidateListByStatus: Joi.object({
+    query: Joi.object({
+      hiringStatus: Joi.number().valid(0, 1, 2, 3).required(),
+      projectId: Joi.number().required(),
+      page: Joi.number(),
+      size: Joi.number(),
+    }).required(),
+  }).unknown(),
+
+  inviteFreelancer: Joi.object({
+    body: Joi.object({
+      projectId: Joi.number().required(),
+      userId: Joi.number().required(),
+    }).required(),
+  }).unknown(),
+
+  updateCandidateStatus: Joi.object({
+    body: Joi.object({
+      hRecordId: Joi.number().required(),
+      status: Joi.number().valid(2, 3).required(),
+    }).required(),
+  }).unknown(),
 }
