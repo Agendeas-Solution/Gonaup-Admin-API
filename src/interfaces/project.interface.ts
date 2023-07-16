@@ -3,3 +3,10 @@ export interface addProjectCommission {
   budgetType: number
   commission: number
 }
+
+export interface candidateListByStatus {
+  hiringStatus: number
+  projectId: number
+  page: number
+  size: number
+}

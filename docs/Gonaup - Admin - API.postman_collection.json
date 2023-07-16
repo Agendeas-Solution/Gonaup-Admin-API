@@ -440,7 +440,7 @@
 				{
 					"name": "Close Project",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
@@ -473,7 +473,7 @@
 				{
 					"name": "Add Project Commission",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
@@ -506,7 +506,7 @@
 				{
 					"name": "Update Hiring Status",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
@@ -539,7 +539,7 @@
 				{
 					"name": "Update Contract Status",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
@@ -564,6 +564,163 @@
 							"path": [
 								"project",
 								"contract-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project Candidate List By Hiring Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/project/candidate-list?page=1&size=10&hiringStatus=0&projectId=2",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"project",
+								"candidate-list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "hiringStatus",
+									"value": "0",
+									"description": "0=invited,1=interested,2=suggested,3=hired"
+								},
+								{
+									"key": "projectId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invite Freelancer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectId\" : 2,\n    \"userId\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/project/invite",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"project",
+								"invite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Candidate Status",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"hRecordId\" : 2,\n    \"status\" : 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/project/candidate-status",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"project",
+								"candidate-status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Freelancer",
+			"item": [
+				{
+					"name": "Search Freelancer",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/freelancer/search?page=1&size=10&projectId=2",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"freelancer",
+								"search"
+							],
+							"query": [
+								{
+									"key": "searchQuery",
+									"value": "de",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "projectId",
+									"value": "2"
+								}
 							]
 						}
 					},

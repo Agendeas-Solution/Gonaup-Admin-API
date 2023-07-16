@@ -75,6 +75,49 @@ class ProjectController {
       next(error)
     }
   }
+
+  async getCandidateListByStatus(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) {
+    try {
+      sendSuccessResponse(
+        res,
+        await projectService.getCandidateListByStatus(req.query),
+      )
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async inviteFreelancer(req: Request, res: Response, next: NextFunction) {
+    try {
+      sendSuccessResponse(
+        res,
+        await projectService.inviteFreelancer(
+          req.body.projectId,
+          req.body.userId,
+        ),
+      )
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async updateCandidateStatus(req: Request, res: Response, next: NextFunction) {
+    try {
+      sendSuccessResponse(
+        res,
+        await projectService.updateCandidateStatus(
+          req.body.status,
+          req.body.hRecordId,
+        ),
+      )
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 export const projectController = new ProjectController()

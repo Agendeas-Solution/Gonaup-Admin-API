@@ -28,5 +28,7 @@ export const MESSAGES = {
     COMMISSION: 'Commission added successfully!',
     HIRING_STATUS: 'Hiring status updated successfully!',
     CONTRACT_STATUS: 'Contract status updated successfully!',
+    INVITED_FREELANCER: 'Freelancer Invited successfully!',
+    FREELANCER_ALREADY_INVITED: 'Freelancer already invited!',
   },
 }

@@ -1,6 +1,7 @@
 import { S3_CONFIG } from '../config'
 import { S3 } from '../constants'
 import { pool } from '../databases'
+import { candidateListByStatus } from '../interfaces'
 import { getProjectOrJobListSearchQuery, paginationLimitQuery } from '../utils'
 
 class ProjectHelper {
@@ -169,6 +170,88 @@ class ProjectHelper {
       WHERE
         id = ?`
     return pool.query(updateQuery, [contractStatus, projectId])
+  }
+
+  async getCandidateListByStatus(data: candidateListByStatus) {
+    const limitQuery = paginationLimitQuery(data.page, data.size)
+
+    const findQuery = `
+      SELECT
+        hr.id,
+        hr.status,
+        u.id as userId,
+        concat("${
+          S3_CONFIG.S3_URL + S3.PROFILE
+        }/", u.image_url) as user_image_url,
+        u.first_name,
+        u.last_name,
+        u.hourly_rate,
+        u.country_name,
+        u.state_name
+      FROM
+        hiring_records as hr
+      LEFT JOIN
+        user_master as u
+      ON
+        u.id = hr.user_id
+      WHERE
+        hr.project_id = ?
+        AND hr.status = ?
+        AND hr.deleted_at is NULL
+      ORDER BY
+        hr.created_at DESC
+      ${limitQuery}`
+    return pool.query(findQuery, [data.projectId, data.hiringStatus])
+  }
+
+  async getCandidateCountByStatus(data: candidateListByStatus) {
+    const findQuery = `
+      SELECT
+        COUNT(1) as total
+      FROM
+        hiring_records
+      WHERE
+        project_id = ?
+        AND status = ?
+        AND deleted_at is NULL`
+    return pool.query(findQuery, [data.projectId, data.hiringStatus])
+  }
+
+  async inviteFreelancer(projectId: number, userId: number) {
+    const insertQuery = `
+    INSERT INTO 
+      hiring_records
+        (project_id, user_id)
+    VALUES 
+        (?,?)`
+    return pool.query(insertQuery, [projectId, userId])
+  }
+
+  async getInvitedFreelancerByProjectAndUserId(
+    projectId: number,
+    userId: number,
+  ) {
+    const findQuery = `
+    SELECT
+      id
+    FROM
+      hiring_records
+    WHERE
+      project_id = ?
+      AND user_id = ?
+      AND deleted_at is NULL`
+    return pool.query(findQuery, [projectId, userId])
+  }
+
+  async updateCandidateStatus(status: number, hRecordId: number) {
+    const updateQuery = `
+      UPDATE 
+        hiring_records
+      SET
+        status = ?
+      WHERE
+        id = ?`
+    return pool.query(updateQuery, [status, hRecordId])
   }
 }
 

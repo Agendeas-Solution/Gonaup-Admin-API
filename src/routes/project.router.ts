@@ -20,32 +20,53 @@ projectRouter.get(
   projectController.getProjectDetailsById,
 )
 
-projectRouter.post(
+projectRouter.put(
   API_URL.PROJECT.CLOSE,
   validateTokenMiddleware,
   joiValidatorMiddleware(projectSchemas.closeProject),
   projectController.closeProject,
 )
 
-projectRouter.post(
+projectRouter.put(
   API_URL.PROJECT.COMMISSION,
   validateTokenMiddleware,
   joiValidatorMiddleware(projectSchemas.addProjectCommission),
   projectController.addProjectCommission,
 )
 
-projectRouter.post(
+projectRouter.put(
   API_URL.PROJECT.HIRING_STATUS,
   validateTokenMiddleware,
   joiValidatorMiddleware(projectSchemas.updateHiringStatus),
   projectController.updateHiringStatus,
 )
 
-projectRouter.post(
+projectRouter.put(
   API_URL.PROJECT.CONTRACT_STATUS,
   validateTokenMiddleware,
   joiValidatorMiddleware(projectSchemas.updateContractStatus),
   projectController.updateProjectContractStatus,
+)
+
+projectRouter.get(
+  API_URL.PROJECT.CANDIDATE_LIST,
+  validateTokenMiddleware,
+  joiValidatorMiddleware(projectSchemas.candidateListByStatus),
+  projectController.getCandidateListByStatus,
+)
+
+projectRouter.post(
+  API_URL.PROJECT.INVITE,
+  validateTokenMiddleware,
+  joiValidatorMiddleware(projectSchemas.inviteFreelancer),
+  projectController.inviteFreelancer,
+)
+
+projectRouter.put(
+  API_URL.PROJECT.CANDIDATE_STATUS,
+  validateTokenMiddleware,
+  joiValidatorMiddleware(projectSchemas.updateCandidateStatus),
+  projectController.updateCandidateStatus,
 )
 
 export { projectRouter }

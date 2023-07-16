@@ -121,6 +121,64 @@ class ProjectService {
       throw error
     }
   }
+
+  async getCandidateListByStatus(data) {
+    try {
+      const [[candidatesCount], [candidateRecords]] = await Promise.all([
+        projectHelper.getCandidateCountByStatus(data),
+        projectHelper.getCandidateListByStatus(data),
+      ])
+
+      if (!candidatesCount[0].total)
+        throw new NotFoundException(MESSAGES.COMMON_MESSAGE.RECORD_NOT_FOUND)
+
+      return {
+        message: MESSAGES.COMMON_MESSAGE.RECORD_FOUND_SUCCESSFULLY,
+        data: {
+          totalPage: candidatesCount[0].total,
+          data: candidateRecords,
+        },
+      }
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
+
+  async inviteFreelancer(projectId: number, userId: number) {
+    try {
+      const [invitedFreelancer] =
+        await projectHelper.getInvitedFreelancerByProjectAndUserId(
+          projectId,
+          userId,
+        )
+
+      if (invitedFreelancer[0])
+        throw new BadRequestException(
+          MESSAGES.PROJECT.FREELANCER_ALREADY_INVITED,
+        )
+
+      await projectHelper.inviteFreelancer(projectId, userId)
+      return {
+        message: MESSAGES.PROJECT.INVITED_FREELANCER,
+      }
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
+
+  async updateCandidateStatus(status: number, hRecordId: number) {
+    try {
+      await projectHelper.updateCandidateStatus(status, hRecordId)
+      return {
+        message: MESSAGES.COMMON_MESSAGE.RECORD_UPDATED_SUCCESSFULLY,
+      }
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
 }
 
 export const projectService = new ProjectService()
