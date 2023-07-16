@@ -3,7 +3,7 @@ import { BadRequestException, NotFoundException } from '../exceptions'
 import { projectHelper } from '../helpers'
 import { MESSAGES } from '../constants'
 import { getSkillList } from '../utils'
-import { addProjectCommission } from '../interfaces'
+import { addProjectCommission, updateCandidateStatus } from '../interfaces'
 
 class ProjectService {
   async getProjectList(data) {
@@ -168,9 +168,9 @@ class ProjectService {
     }
   }
 
-  async updateCandidateStatus(status: number, hRecordId: number) {
+  async updateCandidateStatus(data: updateCandidateStatus) {
     try {
-      await projectHelper.updateCandidateStatus(status, hRecordId)
+      await projectHelper.updateCandidateStatus(data)
       return {
         message: MESSAGES.COMMON_MESSAGE.RECORD_UPDATED_SUCCESSFULLY,
       }

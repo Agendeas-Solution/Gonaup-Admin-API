@@ -1,7 +1,7 @@
 import { S3_CONFIG } from '../config'
 import { S3 } from '../constants'
 import { pool } from '../databases'
-import { candidateListByStatus } from '../interfaces'
+import { candidateListByStatus, updateCandidateStatus } from '../interfaces'
 import { getProjectOrJobListSearchQuery, paginationLimitQuery } from '../utils'
 
 class ProjectHelper {
@@ -179,6 +179,8 @@ class ProjectHelper {
       SELECT
         hr.id,
         hr.status,
+        hr.final_rate,
+        hr.suggested_rate,
         u.id as userId,
         concat("${
           S3_CONFIG.S3_URL + S3.PROFILE
@@ -243,15 +245,20 @@ class ProjectHelper {
     return pool.query(findQuery, [projectId, userId])
   }
 
-  async updateCandidateStatus(status: number, hRecordId: number) {
+  async updateCandidateStatus(data: updateCandidateStatus) {
     const updateQuery = `
       UPDATE 
         hiring_records
       SET
         status = ?
+        ${
+          data.status === 3
+            ? `,final_rate=${data.finalRate},hired_at=now()`
+            : ''
+        }
       WHERE
         id = ?`
-    return pool.query(updateQuery, [status, hRecordId])
+    return pool.query(updateQuery, [data.status, data.hRecordId])
   }
 }
 

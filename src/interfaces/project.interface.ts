@@ -10,3 +10,9 @@ export interface candidateListByStatus {
   page: number
   size: number
 }
+
+export interface updateCandidateStatus {
+  finalRate?: number
+  status: number
+  hRecordId: number
+}

@@ -72,6 +72,7 @@ export const projectSchemas = {
   updateCandidateStatus: Joi.object({
     body: Joi.object({
       hRecordId: Joi.number().required(),
+      finalRate: Joi.number(),
       status: Joi.number().valid(2, 3).required(),
     }).required(),
   }).unknown(),

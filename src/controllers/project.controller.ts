@@ -109,10 +109,7 @@ class ProjectController {
     try {
       sendSuccessResponse(
         res,
-        await projectService.updateCandidateStatus(
-          req.body.status,
-          req.body.hRecordId,
-        ),
+        await projectService.updateCandidateStatus(req.body),
       )
     } catch (error) {
       next(error)
