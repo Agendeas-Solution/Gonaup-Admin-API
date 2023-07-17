@@ -10,7 +10,7 @@ class FreelancerHelper {
     let whereQuery = ''
 
     if (data.searchQuery) {
-      whereQuery = `AND first_name like '%${data.searchQuery}%'`
+      whereQuery = `AND CONCAT(first_name, ' ', last_name) like '%${data.searchQuery}%'`
     }
 
     const findQuery = `
@@ -46,7 +46,7 @@ class FreelancerHelper {
     let whereQuery = ''
 
     if (data.searchQuery) {
-      whereQuery = `AND first_name like '%${data.searchQuery}%'`
+      whereQuery = `AND CONCAT(first_name, ' ', last_name) like '%${data.searchQuery}%'`
     }
 
     const findQuery = `
