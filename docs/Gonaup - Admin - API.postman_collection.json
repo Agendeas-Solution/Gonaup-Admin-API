@@ -354,7 +354,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{localUrl}}/project/list?page=1&size=10&contactStatus=0&jobStatus=0",
+							"raw": "{{localUrl}}/project/list?page=1&size=10&contactStatus=0&jobStatus=0&projectType=1",
 							"host": [
 								"{{localUrl}}"
 							],
@@ -401,6 +401,11 @@
 									"key": "jobStatus",
 									"value": "0",
 									"description": "0=open,1=closed"
+								},
+								{
+									"key": "projectType",
+									"value": "1",
+									"description": "0=project,1=job"
 								}
 							]
 						}
@@ -581,7 +586,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{localUrl}}/project/candidate-list?page=1&size=10&hiringStatus=1&projectId=2",
+							"raw": "{{localUrl}}/project/candidate-list?page=1&size=10&hiringStatus=3&projectId=2",
 							"host": [
 								"{{localUrl}}"
 							],
@@ -600,7 +605,7 @@
 								},
 								{
 									"key": "hiringStatus",
-									"value": "1",
+									"value": "3",
 									"description": "0=invited,1=interested,2=suggested,3=hired"
 								},
 								{

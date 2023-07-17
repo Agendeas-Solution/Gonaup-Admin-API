@@ -13,6 +13,7 @@ export const projectSchemas = {
       hiringStatus: Joi.number(),
       contactStatus: Joi.number(),
       jobStatus: Joi.number(),
+      projectType: Joi.number().valid(0, 1).required(),
       page: Joi.number(),
       size: Joi.number(),
     }).required(),

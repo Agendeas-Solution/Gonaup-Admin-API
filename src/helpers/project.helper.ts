@@ -29,11 +29,12 @@ class ProjectHelper {
         projects as p
       WHERE
         deleted_at IS NULL
+        AND project_type = ?
         ${getProjectOrJobListSearchQuery(data)}
       ORDER BY
         created_at DESC
       ${limitQuery}`
-    return pool.query(findQuery)
+    return pool.query(findQuery, [data.projectType])
   }
 
   async getProjectsCount(data) {
@@ -44,8 +45,9 @@ class ProjectHelper {
         projects
       WHERE
         deleted_at IS NULL
+        AND project_type = ?
         ${getProjectOrJobListSearchQuery(data)}`
-    return pool.query(findQuery)
+    return pool.query(findQuery, [data.projectType])
   }
 
   getHiringRecordsCountSQLByStatus(status: number, alias: string) {
