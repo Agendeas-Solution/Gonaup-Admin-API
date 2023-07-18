@@ -15,6 +15,7 @@ export const MESSAGES = {
     INVALID_EMAIL: 'Invalid Email Address!',
     PROCEED: 'Proceed!',
     NO_TOKEN_SUPPLIED: 'No token supplied',
+    ACCOUNT_CLOSED: 'Account closed successfully!',
   },
   SKILL: {
     SKILL_ALREADY_EXISTS: 'Skill already exists with this name',

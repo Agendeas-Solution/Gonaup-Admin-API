@@ -13,4 +13,24 @@ export const clientSchemas = {
       size: Joi.number(),
     }).required(),
   }).unknown(),
+
+  getClientUserProfile: Joi.object({
+    query: Joi.object({
+      userId: Joi.number().required(),
+    }).required(),
+  }).unknown(),
+
+  getClientCompanyProfile: Joi.object({
+    query: Joi.object({
+      companyId: Joi.number().required(),
+    }).required(),
+  }).unknown(),
+
+  closeAccount: Joi.object({
+    body: Joi.object({
+      companyId: Joi.number().required(),
+      userId: Joi.number().required(),
+      type: Joi.number().valid(0, 1, 2).required(),
+    }).required(),
+  }).unknown(),
 }

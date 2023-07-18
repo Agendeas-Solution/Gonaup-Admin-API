@@ -14,4 +14,9 @@ export const API_URL = {
     INVITE: '/invite',
     CANDIDATE_STATUS: '/candidate-status',
   },
+  CLIENT: {
+    USER_PROFILE: '/user/profile',
+    COMPANY_PROFILE: '/company/profile',
+    CLOSE_ACCOUNT: '/close-account',
+  },
 }

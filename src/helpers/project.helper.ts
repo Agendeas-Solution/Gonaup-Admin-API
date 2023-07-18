@@ -30,6 +30,7 @@ class ProjectHelper {
       WHERE
         deleted_at IS NULL
         AND project_type = ?
+        ${data.companyId ? ` AND company_id = ${data.companyId}` : ''}
         ${getProjectOrJobListSearchQuery(data)}
       ORDER BY
         created_at DESC
@@ -46,6 +47,7 @@ class ProjectHelper {
       WHERE
         deleted_at IS NULL
         AND project_type = ?
+        ${data.companyId ? ` AND company_id = ${data.companyId}` : ''}
         ${getProjectOrJobListSearchQuery(data)}`
     return pool.query(findQuery, [data.projectType])
   }
