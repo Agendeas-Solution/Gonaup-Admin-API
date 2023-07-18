@@ -13,4 +13,25 @@ clientRouter.get(
   clientController.getClientList,
 )
 
+clientRouter.get(
+  API_URL.CLIENT.USER_PROFILE,
+  joiValidatorMiddleware(clientSchemas.getClientUserProfile),
+  validateTokenMiddleware,
+  clientController.getClientUserProfile,
+)
+
+clientRouter.get(
+  API_URL.CLIENT.COMPANY_PROFILE,
+  joiValidatorMiddleware(clientSchemas.getClientCompanyProfile),
+  validateTokenMiddleware,
+  clientController.getClientCompanyProfile,
+)
+
+clientRouter.delete(
+  API_URL.CLIENT.CLOSE_ACCOUNT,
+  joiValidatorMiddleware(clientSchemas.closeAccount),
+  validateTokenMiddleware,
+  clientController.closeAccount,
+)
+
 export { clientRouter }

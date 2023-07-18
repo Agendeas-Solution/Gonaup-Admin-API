@@ -14,6 +14,7 @@ export const projectSchemas = {
       contactStatus: Joi.number(),
       jobStatus: Joi.number(),
       projectType: Joi.number().valid(0, 1).required(),
+      companyId: Joi.number(),
       page: Joi.number(),
       size: Joi.number(),
     }).required(),

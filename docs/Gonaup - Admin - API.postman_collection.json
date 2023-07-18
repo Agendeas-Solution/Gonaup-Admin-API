@@ -354,7 +354,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{localUrl}}/project/list?page=1&size=10&contactStatus=0&jobStatus=0&projectType=1",
+							"raw": "{{localUrl}}/project/list?page=1&size=10&contactStatus=0&jobStatus=0&projectType=1&companyId=2",
 							"host": [
 								"{{localUrl}}"
 							],
@@ -406,6 +406,10 @@
 									"key": "projectType",
 									"value": "1",
 									"description": "0=project,1=job"
+								},
+								{
+									"key": "companyId",
+									"value": "2"
 								}
 							]
 						}
@@ -726,6 +730,159 @@
 									"key": "projectId",
 									"value": "2"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Get Client List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/client/list?page=1&size=10&type=1",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"client",
+								"list"
+							],
+							"query": [
+								{
+									"key": "searchQuery",
+									"value": "de",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "type",
+									"value": "1"
+								},
+								{
+									"key": "isDeleted",
+									"value": "false",
+									"disabled": true
+								},
+								{
+									"key": "searchQuery",
+									"value": "jenish ",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client User Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/client/user/profile?userId=1",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"client",
+								"user",
+								"profile"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client Company Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/client/company/profile?companyId=2",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"client",
+								"company",
+								"profile"
+							],
+							"query": [
+								{
+									"key": "companyId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close Account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyId\" : 2,\n    \"userId\" : 1,\n    \"type\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/client/close-account",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"client",
+								"close-account"
 							]
 						}
 					},
