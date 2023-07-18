@@ -13,4 +13,11 @@ freelancerRouter.get(
   freelancerController.searchFreelancers,
 )
 
+freelancerRouter.get(
+  API_URL.LIST,
+  joiValidatorMiddleware(freelancerSchemas.freelancerList),
+  validateTokenMiddleware,
+  freelancerController.getFreelancerList,
+)
+
 export { freelancerRouter }
