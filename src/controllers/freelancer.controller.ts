@@ -13,6 +13,17 @@ class FreelancerController {
       next(error)
     }
   }
+
+  async getFreelancerList(req: Request, res: Response, next: NextFunction) {
+    try {
+      sendSuccessResponse(
+        res,
+        await freelancerService.getFreelancerList(req.query),
+      )
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 export const freelancerController = new FreelancerController()

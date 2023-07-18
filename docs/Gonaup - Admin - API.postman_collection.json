@@ -734,6 +734,75 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Freelancer List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/freelancer/list?page=1&size=10",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"freelancer",
+								"list"
+							],
+							"query": [
+								{
+									"key": "searchQuery",
+									"value": "de",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "serviceIds",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "hourlyRate",
+									"value": "20",
+									"disabled": true
+								},
+								{
+									"key": "countryId",
+									"value": "99",
+									"disabled": true
+								},
+								{
+									"key": "skills",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "openForWork",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "isDeleted",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
