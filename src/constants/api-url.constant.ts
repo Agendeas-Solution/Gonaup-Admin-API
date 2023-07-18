@@ -5,6 +5,8 @@ export const API_URL = {
   SERVICE: '/service',
   DETAILS: '/details',
   SEARCH: '/search',
+  PROFILE: '/profile',
+  CLOSE_ACCOUNT: '/close-account',
   PROJECT: {
     CLOSE: '/close',
     COMMISSION: '/commission',
@@ -15,8 +17,10 @@ export const API_URL = {
     CANDIDATE_STATUS: '/candidate-status',
   },
   CLIENT: {
-    USER_PROFILE: '/user/profile',
     COMPANY_PROFILE: '/company/profile',
-    CLOSE_ACCOUNT: '/close-account',
+  },
+  FREELANCER: {
+    PROJECT: '/project',
+    JOB_LIST: '/job-list',
   },
 }

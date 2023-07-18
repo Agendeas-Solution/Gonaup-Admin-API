@@ -803,6 +803,129 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Freelancer Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/freelancer/profile?userId=1",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"freelancer",
+								"profile"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Freelancer Project By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/freelancer/project?projectId=3",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"freelancer",
+								"project"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Freelancer Job List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/freelancer/job-list?userId=1",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"freelancer",
+								"job-list"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close Account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/freelancer/close-account",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"freelancer",
+								"close-account"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -874,13 +997,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{localUrl}}/client/user/profile?userId=1",
+							"raw": "{{localUrl}}/client/profile?userId=1",
 							"host": [
 								"{{localUrl}}"
 							],
 							"path": [
 								"client",
-								"user",
 								"profile"
 							],
 							"query": [
