@@ -14,7 +14,7 @@ export const clientSchemas = {
     }).required(),
   }).unknown(),
 
-  getClientUserProfile: Joi.object({
+  getUserProfile: Joi.object({
     query: Joi.object({
       userId: Joi.number().required(),
     }).required(),

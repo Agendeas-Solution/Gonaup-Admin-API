@@ -162,6 +162,149 @@ class FreelancerHelper {
 
     return whereQuery
   }
+
+  getFreelancerProfileDetailseById(userId: number) {
+    const findQuery = `
+    SELECT
+      first_name,
+      last_name,
+      email,
+      concat("${S3_CONFIG.S3_URL + S3.PROFILE}/", image_url) as image_url,
+      contact_number,
+      skype_id,
+      address,
+      country_name,
+      state_name,
+      city_name,
+      zip_code,
+      description,
+      professional_role,
+      english_level,
+      hourly_rate,
+      freelance_profile,
+      linkdin_profile,
+      github_profile,
+      services_offer,
+      skills
+    FROM
+      user_master
+    WHERE
+      id = ?
+      AND deleted_at IS NULL
+    `
+    return pool.query(findQuery, [userId])
+  }
+
+  getFreelancerEducationList(userId: number) {
+    const findQuery = `
+    SELECT
+      id,
+      school,
+      degree,
+      study_in,
+      date_from,
+      date_to
+    FROM
+      freelancer_education
+    WHERE
+      user_id = ?
+      AND deleted_at IS NULL`
+    return pool.query(findQuery, [userId])
+  }
+
+  getFreelancerExperienceList(userId: number) {
+    const findQuery = `
+    SELECT
+      id,
+      title,
+      company,
+      is_working,
+      working_from,
+      working_to,
+      city_name,
+      country_name
+    FROM
+      freelancer_experience
+    WHERE
+      user_id = ?
+      AND deleted_at IS NULL`
+    return pool.query(findQuery, [userId])
+  }
+
+  getFreelancerProjectList(userId: number) {
+    const findQuery = `
+    SELECT
+      id,
+      title,
+      project_image_url
+    FROM
+      freelancer_projects
+    WHERE
+      user_id = ?
+      AND deleted_at IS NULL`
+    return pool.query(findQuery, [userId])
+  }
+
+  getFreelancerProjectDetailById(projectId: number) {
+    const findQuery = `
+    SELECT
+      id,
+      project_image_url,
+      title,
+      project_url,
+      description,
+      skills,
+      date_from,
+      date_to
+    FROM
+      freelancer_projects
+    WHERE
+      id = ?
+      AND deleted_at IS NULL`
+    return pool.query(findQuery, [projectId])
+  }
+
+  async getFreelancerJobList(data) {
+    const limitQuery = paginationLimitQuery(data.page, data.size)
+
+    const findQuery = `
+      SELECT
+        p.id,
+        p.title,
+        hr.hired_at,
+        hr.final_rate
+      FROM
+        projects as p
+      LEFT JOIN
+        hiring_records as hr
+      ON
+        hr.project_id = p.id
+      WHERE
+        p.deleted_at IS NULL
+        AND hr.user_id = ?
+        AND hr.status = 3
+      ORDER BY
+        p.created_at DESC
+      ${limitQuery}`
+    return pool.query(findQuery, [data.userId])
+  }
+
+  async getFreelancerJobCount(data) {
+    const findQuery = `
+      SELECT
+        COUNT(1) as total
+      FROM
+        projects as p
+      LEFT JOIN
+        hiring_records as hr
+      ON
+        hr.project_id = p.id
+      WHERE
+        p.deleted_at IS NULL
+        AND hr.user_id = ?
+        AND hr.status = 3`
+    return pool.query(findQuery, [data.userId])
+  }
 }
 
 export const freelancerHelper = new FreelancerHelper()

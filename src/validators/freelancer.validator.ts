@@ -26,4 +26,24 @@ export const freelancerSchemas = {
       isDeleted: Joi.boolean(),
     }).required(),
   }).unknown(),
+
+  gerFreelancerProjectDetails: Joi.object({
+    query: Joi.object({
+      projectId: Joi.number().required(),
+    }).required(),
+  }).unknown(),
+
+  getFreelancerJobList: Joi.object({
+    query: Joi.object({
+      userId: Joi.number().required(),
+      page: Joi.number(),
+      size: Joi.number(),
+    }).required(),
+  }).unknown(),
+
+  closeAccount: Joi.object({
+    body: Joi.object({
+      userId: Joi.number().required(),
+    }).required(),
+  }).unknown(),
 }
