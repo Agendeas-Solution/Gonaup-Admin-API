@@ -41,6 +41,10 @@ export const getServiceList = async (
 
 export const getProjectOrJobListSearchQuery = (data: any) => {
   let whereQuery = ''
+
+  if (data.searchQuery) {
+    whereQuery += ` AND title like '%${data.searchQuery}%'`
+  }
   if (data.serviceId) {
     whereQuery += ` AND service_id = ${data.serviceId}`
   }
