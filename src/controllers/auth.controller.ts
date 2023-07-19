@@ -10,6 +10,21 @@ class AuthController {
       next(error)
     }
   }
+
+  async changePassword(req: Request, res: Response, next: NextFunction) {
+    try {
+      sendSuccessResponse(
+        res,
+        await authService.changePassword(
+          req.token.userId,
+          req.body.newPassword,
+          req.body.oldPassword,
+        ),
+      )
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 export const authController = new AuthController()

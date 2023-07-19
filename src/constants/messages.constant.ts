@@ -5,6 +5,7 @@ export const MESSAGES = {
     USER_ALREADY_EXISTS: 'User already exists with this email address',
     USER_NOT_EXISTS: 'User not exists with this email address',
     INVALID_EMAIL_PASSWORD: 'Invalid email or password',
+    PASSWORD_CHANGED: 'Password changed successfully',
   },
   COMMON_MESSAGE: {
     RECORD_FOUND_SUCCESSFULLY: 'Record found successfully!',

@@ -1,5 +1,8 @@
 export const API_URL = {
-  LOGIN: '/login',
+  AUTH: {
+    CHANGE_PASSWORD: '/change-password',
+    LOGIN: '/login',
+  },
   LIST: '/list',
   SKILL: '/skill',
   SERVICE: '/service',
