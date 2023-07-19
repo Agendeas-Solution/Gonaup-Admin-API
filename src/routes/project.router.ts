@@ -20,7 +20,7 @@ projectRouter.get(
   projectController.getProjectDetailsById,
 )
 
-projectRouter.put(
+projectRouter.delete(
   API_URL.PROJECT.CLOSE,
   validateTokenMiddleware,
   joiValidatorMiddleware(projectSchemas.closeProject),

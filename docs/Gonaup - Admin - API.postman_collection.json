@@ -449,7 +449,7 @@
 				{
 					"name": "Close Project",
 					"request": {
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Authorization",
