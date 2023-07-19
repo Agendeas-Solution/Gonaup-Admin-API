@@ -36,6 +36,39 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldPassword\": \"jenish@810\",\n    \"newPassword\": \"jenish@820\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localUrl}}/auth/change-password",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -354,7 +387,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{localUrl}}/project/list?page=1&size=10&contactStatus=0&jobStatus=0&projectType=1&companyId=2",
+							"raw": "{{localUrl}}/project/list?page=1&size=10&projectType=1",
 							"host": [
 								"{{localUrl}}"
 							],
@@ -365,7 +398,7 @@
 							"query": [
 								{
 									"key": "searchQuery",
-									"value": "de",
+									"value": "d",
 									"disabled": true
 								},
 								{
@@ -395,12 +428,14 @@
 								{
 									"key": "contactStatus",
 									"value": "0",
-									"description": "0=open,1=closed"
+									"description": "0=open,1=closed",
+									"disabled": true
 								},
 								{
 									"key": "jobStatus",
 									"value": "0",
-									"description": "0=open,1=closed"
+									"description": "0=open,1=closed",
+									"disabled": true
 								},
 								{
 									"key": "projectType",
@@ -409,7 +444,8 @@
 								},
 								{
 									"key": "companyId",
-									"value": "2"
+									"value": "2",
+									"disabled": true
 								}
 							]
 						}

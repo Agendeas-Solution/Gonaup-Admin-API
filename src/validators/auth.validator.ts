@@ -10,4 +10,11 @@ export const authSchemas = {
       password: Joi.string().required(),
     }).required(),
   }).unknown(),
+
+  changePassword: Joi.object({
+    body: Joi.object({
+      newPassword: Joi.string().required(),
+      oldPassword: Joi.string().required(),
+    }).required(),
+  }).unknown(),
 }

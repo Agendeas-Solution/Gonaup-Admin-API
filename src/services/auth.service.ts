@@ -33,6 +33,33 @@ class AuthService {
       throw error
     }
   }
+
+  async changePassword(
+    userId: number,
+    newPassword: string,
+    oldPassword: string,
+  ) {
+    try {
+      const [existedUser] = await adminHelper.getOldPassword(userId)
+
+      const isMatched = await bcrypt.compare(
+        oldPassword,
+        existedUser[0].password,
+      )
+
+      if (!isMatched)
+        throw new BadRequestException(MESSAGES.AUTH.INVALID_EMAIL_PASSWORD)
+
+      newPassword = await bcrypt.hash(newPassword, SERVER_CONFIG.HASH_SALT)
+      await adminHelper.changePassword(userId, newPassword)
+      return {
+        message: MESSAGES.AUTH.PASSWORD_CHANGED,
+      }
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
 }
 
 export const authService = new AuthService()
