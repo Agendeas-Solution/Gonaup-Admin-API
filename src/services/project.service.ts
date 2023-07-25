@@ -74,7 +74,7 @@ class ProjectService {
 
   async addProjectCommission(data: addProjectCommission) {
     try {
-      const [projectBudget] = await projectHelper.getProjectBudget(
+      const [projectBudget] = await projectHelper.getProjectBudgetAndCommission(
         data.projectId,
       )
       if (!projectBudget[0])
@@ -147,6 +147,16 @@ class ProjectService {
 
   async inviteFreelancer(projectId: number, userId: number) {
     try {
+      const [projectBudget] = await projectHelper.getProjectBudgetAndCommission(
+        projectId,
+      )
+
+      if (!projectBudget[0])
+        throw new NotFoundException(MESSAGES.COMMON_MESSAGE.RECORD_NOT_FOUND)
+
+      if (!projectBudget[0].commission)
+        throw new BadRequestException(MESSAGES.PROJECT.COMMISSION_NOT_FOUND)
+
       const [invitedFreelancer] =
         await projectHelper.getInvitedFreelancerByProjectAndUserId(
           projectId,

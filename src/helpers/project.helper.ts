@@ -141,11 +141,12 @@ class ProjectHelper {
     return pool.query(updateQuery, [commission, projectId])
   }
 
-  async getProjectBudget(projectId: number) {
+  async getProjectBudgetAndCommission(projectId: number) {
     const findQuery = `
       SELECT
         fixed_budget,
-        min_hourly_budget
+        min_hourly_budget,
+        commission
       FROM
         projects
       WHERE
