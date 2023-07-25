@@ -1,7 +1,7 @@
 import { S3_CONFIG } from '../config'
 import { S3 } from '../constants'
 import { pool } from '../databases'
-import { paginationLimitQuery } from '../utils'
+import { getSkillOrServiceFilterQuery, paginationLimitQuery } from '../utils'
 
 class FreelancerHelper {
   async searchFreelancer(data) {
@@ -126,7 +126,10 @@ class FreelancerHelper {
     }
 
     if (data.serviceIds) {
-      whereQuery += ` AND FIND_IN_SET(${data.serviceIds},services_offer)`
+      whereQuery += getSkillOrServiceFilterQuery(
+        data.serviceIds.split(','),
+        'services_offer',
+      )
     }
 
     if (data.hourlyRate) {
@@ -138,7 +141,10 @@ class FreelancerHelper {
     }
 
     if (data.skills) {
-      whereQuery += ` AND FIND_IN_SET(${data.skills},skills)`
+      whereQuery += getSkillOrServiceFilterQuery(
+        data.skills.split(','),
+        'skills',
+      )
     }
 
     if (data.openForWork) {

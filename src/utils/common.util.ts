@@ -49,7 +49,7 @@ export const getProjectOrJobListSearchQuery = (data: any) => {
     whereQuery += ` AND service_id = ${data.serviceId}`
   }
   if (data.skills) {
-    whereQuery += ` AND FIND_IN_SET(${data.skills},skills)`
+    whereQuery += getSkillOrServiceFilterQuery(data.skills.split(','), 'skills')
   }
   if (data.minHourlyRate) {
     whereQuery += ` AND min_hourly_budget = ${data.minHourlyRate}`
@@ -65,4 +65,19 @@ export const getProjectOrJobListSearchQuery = (data: any) => {
   }
 
   return whereQuery
+}
+
+export const getSkillOrServiceFilterQuery = (
+  list: any,
+  column: string,
+  isOr = false,
+) => {
+  let findInSetQuery = ''
+
+  for (const element of list) {
+    findInSetQuery += ` ${
+      isOr ? 'OR' : 'AND'
+    } FIND_IN_SET(${element},${column}) > 0`
+  }
+  return findInSetQuery
 }
