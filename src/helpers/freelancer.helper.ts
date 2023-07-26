@@ -79,7 +79,7 @@ class FreelancerHelper {
           COUNT(1)
         FROM
           hiring_records as hr
-        LEFT JOIN
+        INNER JOIN
           projects as p
         ON
           hr.project_id = p.id
@@ -154,7 +154,7 @@ class FreelancerHelper {
           COUNT(1)
         FROM
           hiring_records as hr
-        LEFT JOIN
+        INNER JOIN
           projects as p
         ON
           hr.project_id = p.id
@@ -281,7 +281,7 @@ class FreelancerHelper {
         hr.final_rate
       FROM
         projects as p
-      LEFT JOIN
+      INNER JOIN
         hiring_records as hr
       ON
         hr.project_id = p.id
@@ -301,7 +301,7 @@ class FreelancerHelper {
         COUNT(1) as total
       FROM
         projects as p
-      LEFT JOIN
+      INNER JOIN
         hiring_records as hr
       ON
         hr.project_id = p.id

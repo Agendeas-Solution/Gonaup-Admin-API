@@ -197,7 +197,7 @@ class ProjectHelper {
         u.state_name
       FROM
         hiring_records as hr
-      LEFT JOIN
+      INNER JOIN
         user_master as u
       ON
         u.id = hr.user_id
