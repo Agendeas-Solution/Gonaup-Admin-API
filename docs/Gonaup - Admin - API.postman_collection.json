@@ -807,7 +807,7 @@
 								},
 								{
 									"key": "serviceIds",
-									"value": "1",
+									"value": "1,2,3",
 									"disabled": true
 								},
 								{
@@ -822,7 +822,7 @@
 								},
 								{
 									"key": "skills",
-									"value": "1",
+									"value": "1,2",
 									"disabled": true
 								},
 								{
@@ -1116,6 +1116,59 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "Get Notification List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/notifications/list",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"notifications",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Notification Count",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localUrl}}/notifications/count",
+							"host": [
+								"{{localUrl}}"
+							],
+							"path": [
+								"notifications",
+								"count"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -1146,7 +1199,7 @@
 		},
 		{
 			"key": "authToken",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY4NzA5MTM0M30.KFf-_NpoiYf1tkOuqkUfg03RqSYJtI_aVzqKQWmORkM",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MDgxMDE5NH0.8_0m2Sq-rP2w17WpqnSkQa9QH-TkYHXyn6rVPxNNerc",
 			"type": "string"
 		}
 	]
