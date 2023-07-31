@@ -10,6 +10,7 @@ export const API_URL = {
   SEARCH: '/search',
   PROFILE: '/profile',
   CLOSE_ACCOUNT: '/close-account',
+  NOTIFICATION_COUNT: '/count',
   PROJECT: {
     CLOSE: '/close',
     COMMISSION: '/commission',
