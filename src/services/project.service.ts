@@ -169,6 +169,12 @@ class ProjectService {
         )
 
       await projectHelper.inviteFreelancer(projectId, userId)
+      await this.saveNotification(
+        projectId,
+        userId,
+        'You Invited For [[TITLE]]',
+        'Please Apply on this project if you are interested.',
+      )
       return {
         message: MESSAGES.PROJECT.INVITED_FREELANCER,
       }
@@ -181,6 +187,21 @@ class ProjectService {
   async updateCandidateStatus(data: updateCandidateStatus) {
     try {
       await projectHelper.updateCandidateStatus(data)
+      if (data.status === 2) {
+        await this.saveNotification(
+          data.projectId,
+          data.clientUserId,
+          'Freelancers Suggested For [[TITLE]]',
+          'Check Freelancer by clicking this link.',
+        )
+      } else if (data.status === 3) {
+        await this.saveNotification(
+          data.projectId,
+          data.userId,
+          'You are Hired For [[TITLE]]',
+          'Please Join Skype group with this link',
+        )
+      }
       return {
         message: MESSAGES.COMMON_MESSAGE.RECORD_UPDATED_SUCCESSFULLY,
       }
@@ -188,6 +209,24 @@ class ProjectService {
       console.log(error)
       throw error
     }
+  }
+
+  async saveNotification(
+    projectId: number,
+    userId: number,
+    title: string,
+    content: string,
+  ) {
+    const [project] = await projectHelper.getProjectTitleById(projectId)
+    const [notification] = await projectHelper.saveNotification({
+      projectId,
+      title: title.replace('[[TITLE]]', project[0]?.title),
+      content,
+    })
+    await projectHelper.saveNotificationRecipients(
+      notification['insertId'],
+      userId,
+    )
   }
 }
 

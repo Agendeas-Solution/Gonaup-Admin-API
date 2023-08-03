@@ -76,6 +76,9 @@ export const projectSchemas = {
       hRecordId: Joi.number().required(),
       finalRate: Joi.number(),
       status: Joi.number().valid(2, 3).required(),
+      userId: Joi.number(),
+      projectId: Joi.number(),
+      clientUserId: Joi.number(),
     }).required(),
   }).unknown(),
 }
