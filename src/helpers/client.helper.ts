@@ -92,7 +92,8 @@ class ClientHelper {
         contact_number,
         email,
         skype_id,
-        c.linkdin_profile as linkdin_profile
+        c.linkdin_profile as linkdin_profile,
+        c.id as companyId
       FROM
         user_master as u
       LEFT JOIN
