@@ -201,6 +201,12 @@ class ProjectService {
           'You are Hired For [[TITLE]]',
           'Please Join Skype group with this link',
         )
+        await this.saveNotification(
+          data.projectId,
+          data.clientUserId,
+          (data.candidateName || 'Freelancer') + 'are Hired For [[TITLE]]',
+          'Please Join Skype group with this link',
+        )
       }
       return {
         message: MESSAGES.COMMON_MESSAGE.RECORD_UPDATED_SUCCESSFULLY,

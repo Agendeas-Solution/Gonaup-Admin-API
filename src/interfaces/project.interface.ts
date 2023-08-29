@@ -18,6 +18,7 @@ export interface updateCandidateStatus {
   userId?: number
   projectId?: number
   clientUserId?: number
+  candidateName?: string
 }
 
 export interface saveProjectNotification {

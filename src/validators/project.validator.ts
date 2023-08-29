@@ -79,6 +79,7 @@ export const projectSchemas = {
       userId: Joi.number(),
       projectId: Joi.number(),
       clientUserId: Joi.number(),
+      candidateName: Joi.string(),
     }).required(),
   }).unknown(),
 }
