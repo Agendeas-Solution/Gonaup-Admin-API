@@ -307,6 +307,18 @@ class ProjectHelper {
         AND deleted_at IS NULL`
     return pool.query(findQuery, [projectId])
   }
+
+  async getUserEmailById(userId: number) {
+    const findQuery = `
+      SELECT
+        email
+      FROM
+        user_master
+      WHERE
+        id = ?
+        AND deleted_at IS NULL`
+    return pool.query(findQuery, [userId])
+  }
 }
 
 export const projectHelper = new ProjectHelper()

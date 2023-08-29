@@ -2,7 +2,7 @@ import { FieldPacket, RowDataPacket } from 'mysql2'
 import { BadRequestException, NotFoundException } from '../exceptions'
 import { projectHelper } from '../helpers'
 import { MESSAGES } from '../constants'
-import { getSkillList } from '../utils'
+import { getSkillList, sendEmail } from '../utils'
 import { addProjectCommission, updateCandidateStatus } from '../interfaces'
 
 class ProjectService {
@@ -204,7 +204,7 @@ class ProjectService {
         await this.saveNotification(
           data.projectId,
           data.clientUserId,
-          (data.candidateName || 'Freelancer') + 'are Hired For [[TITLE]]',
+          (data.candidateName || 'Freelancer') + ' is Hired For [[TITLE]]',
           'Please Join Skype group with this link',
         )
       }
@@ -233,6 +233,15 @@ class ProjectService {
       notification['insertId'],
       userId,
     )
+
+    const [email] = await projectHelper.getUserEmailById(userId)
+    if (email[0]) {
+      sendEmail({
+        to: email[0].email,
+        subject: title.replace('[[TITLE]]', project[0]?.title),
+        html: `<p>${content}</p>`,
+      })
+    }
   }
 }
 
