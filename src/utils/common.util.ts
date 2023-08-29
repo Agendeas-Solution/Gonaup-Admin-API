@@ -1,6 +1,7 @@
 import { FieldPacket, RowDataPacket } from 'mysql2'
-import { S3_CONFIG } from '../config'
-import { serviceHelper, skillHelper } from '../helpers'
+import { EMAIL_CONFIG, S3_CONFIG } from '../config'
+import { mailHelper, serviceHelper, skillHelper } from '../helpers'
+import { sendEmailInterface } from '../interfaces'
 
 export const paginationLimitQuery = (pageNumber = 1, pageSize = 10) => {
   const pageOffset = (pageNumber - 1) * pageSize
@@ -80,4 +81,27 @@ export const getSkillOrServiceFilterQuery = (
     } FIND_IN_SET(${element},${column}) > 0`
   }
   return findInSetQuery
+}
+
+export async function sendEmail({
+  to,
+  subject = '',
+  text = '',
+  html = '',
+}: sendEmailInterface) {
+  try {
+    await mailHelper.getTransport().sendMail({
+      from: {
+        name: EMAIL_CONFIG.SENDER_NAME,
+        address: EMAIL_CONFIG.SENDER_EMAIL,
+      },
+      to,
+      subject,
+      text,
+      html,
+    })
+  } catch (error) {
+    console.log(error)
+    return error
+  }
 }
