@@ -15,4 +15,14 @@ export interface updateCandidateStatus {
   finalRate?: number
   status: number
   hRecordId: number
+  userId?: number
+  projectId?: number
+  clientUserId?: number
+  candidateName?: string
+}
+
+export interface saveProjectNotification {
+  projectId: number
+  title: string
+  content: string
 }

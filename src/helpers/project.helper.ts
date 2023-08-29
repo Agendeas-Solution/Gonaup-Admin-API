@@ -1,7 +1,11 @@
 import { S3_CONFIG } from '../config'
 import { S3 } from '../constants'
 import { pool } from '../databases'
-import { candidateListByStatus, updateCandidateStatus } from '../interfaces'
+import {
+  candidateListByStatus,
+  saveProjectNotification,
+  updateCandidateStatus,
+} from '../interfaces'
 import { getProjectOrJobListSearchQuery, paginationLimitQuery } from '../utils'
 
 class ProjectHelper {
@@ -87,6 +91,7 @@ class ProjectHelper {
         p.commission,
         p.hiring_status,
         p.contract_status,
+        u.id as clientUserId,
         u.first_name as user_first_name,
         u.last_name as user_last_name,
         concat("${
@@ -264,6 +269,55 @@ class ProjectHelper {
       WHERE
         id = ?`
     return pool.query(updateQuery, [data.status, data.hRecordId])
+  }
+
+  async saveNotification(data: saveProjectNotification) {
+    const insertQuery = `
+    INSERT INTO notifications
+      (
+        title,
+        content,
+        project_id
+      )
+    VALUES 
+      (? ,? ,?)`
+    return pool.query(insertQuery, [data.title, data.content, data.projectId])
+  }
+
+  async saveNotificationRecipients(notificationId: number, userId: number) {
+    const insertQuery = `
+    INSERT INTO notification_recipients
+      (
+        notification_id,
+        user_id
+      )
+    VALUES 
+      (? ,?)`
+    return pool.query(insertQuery, [notificationId, userId])
+  }
+
+  async getProjectTitleById(projectId: number) {
+    const findQuery = `
+      SELECT
+        title
+      FROM
+        projects
+      WHERE
+        id = ?
+        AND deleted_at IS NULL`
+    return pool.query(findQuery, [projectId])
+  }
+
+  async getUserEmailById(userId: number) {
+    const findQuery = `
+      SELECT
+        email
+      FROM
+        user_master
+      WHERE
+        id = ?
+        AND deleted_at IS NULL`
+    return pool.query(findQuery, [userId])
   }
 }
 
